@@ -100,6 +100,7 @@ void FreeHMM(HMM *phmm)
 **	quite weirdly.
 */ 
 
+
 void InitHMM(HMM *phmm, int N, int M, int D, struct samples *p_samples,int **topo)
 {
     assert(N >= 1);
@@ -145,7 +146,6 @@ void InitHMM(HMM *phmm, int N, int M, int D, struct samples *p_samples,int **top
 
     /* initialize topo*/
     phmm->A_topo = (int **) imatrix(1, phmm->N, 1, phmm->N);
-    clear_imatrix(phmm->A_topo, 1, N, 1, N);
     if(topo)
     {
         for (i = 1; i <= N; i++) 

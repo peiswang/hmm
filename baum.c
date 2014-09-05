@@ -73,8 +73,8 @@ void f(HMM *phmm, struct samples *p_samples, struct local_store_c *c, struct loc
 	    Forward(phmm, T, outprob, alpha, &logprobf);
 	    Backward(phmm, T, outprob, beta, &logprobb);
 
-        if(logprobf<20)
-                continue;
+        //if(logprobf<600)
+        //        continue;
         valid_count++;
         printf("logprobf is %lf\n", logprobf);
 

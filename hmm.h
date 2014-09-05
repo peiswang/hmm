@@ -48,6 +48,7 @@ typedef struct {
 
 void ReadHMM(FILE *fp, HMM *phmm);
 void PrintHMM(const char *fn, HMM *phmm);
+void AllocateHMM(HMM *phmm, int N, int M, int D);
 void InitHMM(HMM *phmm, int N, int M, int D, struct samples *p_samples,int **topo);
 void CopyHMM(HMM *phmm1, HMM *phmm2);
 void FreeHMM(HMM *phmm);
