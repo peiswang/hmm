@@ -1,4 +1,6 @@
 an extension of umdhmm
+
+See:
 Package: UMDHMM version 1.02
 Author: Tapas Kanungo (kanungo@cfar.umd.edu)
         Organization: University of Maryland, Collge Park, MD
@@ -7,8 +9,8 @@ Author: Tapas Kanungo (kanungo@cfar.umd.edu)
 
 
 
-extension:
+Extension:
 
-continuous density estimation
+Continuous Density Estimation
 
-multiple observation sequences of unequal length
+Multiple Observation Sequences of Unequal Length

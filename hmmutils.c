@@ -1,11 +1,11 @@
 /*
-**      Author: Tapas Kanungo, kanungo@cfar.umd.edu
-**      Date:   15 December 1997
+**      Author: peisong wang peisong.wang@nlpr.ia.ac.cn
+**      Date:   5 September 2014 
 **      File:   hmmutils.c
 **      Purpose: utilities for reading, writing HMM stuff. 
-**      Organization: University of Maryland
+**      Organization: 
 **
-**      $Id: hmmutils.c,v 1.4 1998/02/23 07:51:26 kanungo Exp kanungo $
+**      AN Extension of UMDHMM
 */
 
 #include <stdio.h>
@@ -17,7 +17,6 @@
 #include "hmm.h"
 #include "sample.h"
 
-static char rcsid[] = "$Id: hmmutils.c,v 1.4 1998/02/23 07:51:26 kanungo Exp kanungo $";
 
 void ReadHMM(FILE *fp, HMM *phmm)
 {

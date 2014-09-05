@@ -1,24 +1,18 @@
 /*
-**      Author: Tapas Kanungo, kanungo@cfar.umd.edu
-**      Date:   15 December 1997
-**      File:   forward.c
-**      Purpose: Foward algorithm for computing the probabilty 
-**		of observing a sequence given a HMM model parameter.
-**      Organization: University of Maryland
-**
-**      $Id: forward.c,v 1.2 1998/02/19 12:42:31 kanungo Exp kanungo $
-*/
+ **      Author: peisong wang peisong.wang@nlpr.ia.ac.cn
+ **      Date:   5 September 2014 
+ **      File:   forward.c
+ **      Purpose: Forward algorithm for computing the probabilty
+ **              of observing a sequence given a HMM model parameter.
+ **      Organization: 
+ **
+ **      AN Extension of UMDHMM
+ */
 #include <stdio.h>
 #include <float.h>
 #include "nrutil.h"
 #include "hmm.h"
 
-static char rcsid[] = "$Id: forward.c,v 1.2 1998/02/19 12:42:31 kanungo Exp kanungo $";
-
-//inline double f(double x, double y)
-//{
-//    return x+y;
-//}
 
 void Forward(HMM *phmm, int T, double **outprob, double **alpha, double *pprob)
 {
@@ -31,13 +25,8 @@ void Forward(HMM *phmm, int T, double **outprob, double **alpha, double *pprob)
  
     for (i = 1; i <= phmm->N; i++)
     {
-        //printf("pi[%d] = %.5f, outprob[%d][1] = %.5f\n ", i, phmm->pi[i],i,outprob[i][1]);
         alpha[1][i] = (phmm->pi[i] + outprob[i][1]);
-        //printf("%.5f  \n",logProd(phmm->pi[i], outprob[i][1]));
-        //printf("%.5f  ",alpha[1][i]);
-        //printf("%.5f  \n",f(phmm->pi[i],outprob[i][1]));
     }
-    //printf("\n");
  
     /* 2. Induction */
  
@@ -48,9 +37,7 @@ void Forward(HMM *phmm, int T, double **outprob, double **alpha, double *pprob)
                 sum = logSum( sum, (alpha[t][i] + phmm->A[i][j]) );
 
             alpha[t+1][j] = (sum + outprob[j][t+1]);
-            //printf("%.5f  ",alpha[t+1][j]);
         }
-    //printf("\n");
     }
  
     /* 3. Termination */
@@ -77,12 +64,9 @@ void ForwardWithScale(HMM *phmm, int T, double **outprob, double **alpha,
 		alpha[1][i] = phmm->pi[i] * outprob[i][1];
 		scale[1] += alpha[1][i];
 	}
-    if(isnan(scale[1]))
-        printf("sssssssssssssssss\n");
-    if(scale[1]<DBL_MIN)
+    if(isnan(scale[1]) || scale[1]<DBL_MIN)
     {
         printf("Scale[1] is 0 in ForwardWithScale()!!!\n");
-        //fprintf(stderr, "Scale[1] is 0 in ForwardWithScale()!!!\n");
         return;
     }
     c_s = 1.0 / scale[1];
@@ -105,7 +89,6 @@ void ForwardWithScale(HMM *phmm, int T, double **outprob, double **alpha,
         if(scale[t+1]<DBL_MIN)
         {
             printf("Scale[%d] is 0 in ForwardWithScale()!!!\n", t+1);
-            //fprintf(stderr, "Scale[%d] is 0 in ForwardWithScale()!!!\n", t+1);
             return;
         }
         c_s = 1.0 / scale[t+1];

@@ -1,15 +1,11 @@
 /*
-**      Author: Tapas Kanungo, kanungo@cfar.umd.edu
-**      Date:   15 December 1997
+**      Author: peisong wang peisong.wang@nlpr.ia.ac.cn
+**      Date:   5 September 2014 
 **      File:   hmm.h
 **      Purpose: datastructures used for HMM. 
-**      Organization: University of Maryland
+**      Organization: 
 **
-**	Update:
-**	Author: Tapas Kanungo
-**	Purpose: include <math.h>. Not including this was
-**		creating a problem with forward.c
-**      $Id: hmm.h,v 1.9 1999/05/02 18:38:11 kanungo Exp kanungo $
+**      AN Extension of UMDHMM
 */
 
 #ifndef __HMM_H__
@@ -77,12 +73,6 @@ void BaumWelch(HMM *phmm, struct samples *,
 //        int *q, double *pprob);
 //void ViterbiLog(HMM *phmm, int T, int *O, double **delta, int **psi,
 //        int *q, double *pprob);
-
-/* random number generator related functions*/
-
-//int hmmgetseed(void);
-//void hmmsetseed(int seed);
-//double hmmgetrand(void);
 
 #define MAX(x,y)        ((x) > (y) ? (x) : (y))
 #define MIN(x,y)        ((x) < (y) ? (x) : (y))

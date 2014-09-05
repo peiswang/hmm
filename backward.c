@@ -1,18 +1,17 @@
 /*
-**      Author: Tapas Kanungo, kanungo@cfar.umd.edu
-**      Date:   15 December 1997
+**      Author: peisong wang peisong.wang@nlpr.ia.ac.cn
+**      Date:   5 September 2014 
 **      File:   backward.c
 **      Purpose: Backward algorithm for computing the probabilty
 **              of observing a sequence given a HMM model parameter.
-**      Organization: University of Maryland
+**      Organization: 
 **
-**      $Id: backward.c,v 1.3 1998/02/23 07:56:05 kanungo Exp kanungo $
+**      AN Extension of UMDHMM
 */
 
 #include <stdio.h>
 #include "hmm.h"
 #include "nrutil.h"
-static char rcsid[] = "$Id: backward.c,v 1.3 1998/02/23 07:56:05 kanungo Exp kanungo $";
 
 void Backward(HMM *phmm, int T, double **outprob, double **beta, double *pprob)
 {

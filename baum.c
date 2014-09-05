@@ -1,18 +1,13 @@
 /*
-**      Author: Tapas Kanungo, kanungo@cfar.umd.edu
-**      Date:   15 December 1997
-**      File:   baumwelch.c
+**      Author: peisong wang, peisong.wang@nlpr.ia.ac.cn
+**      Date:   5 September 2014
+**      File:   baum.c
 **      Purpose: Baum-Welch algorithm for estimating the parameters
-**              of a HMM model, given an observation sequence. 
-**      Organization: University of Maryland
+**              of a HMM model, given an observation sequences. 
+**      Organization: 
 **
-**	Update: 
-**	Author: Tapas Kanungo
-**	Date:	19 April 1999
-**	Purpose: Changed the convergence criterion from ratio
-**		to absolute value. 
+**      AN Extension of UMDHMM
 **
-**      $Id: baumwelch.c,v 1.6 1999/04/24 15:58:43 kanungo Exp kanungo $
 */
 
 #include <stdio.h> 
@@ -21,8 +16,6 @@
 #include "nrutil.h"
 #include "hmm.h"
 #include "sample.h"
-
-static char rcsid[] = "$Id: baumwelch.c,v 1.6 1999/04/24 15:58:43 kanungo Exp kanungo $";
 
 #define DELTA -100 
 
@@ -82,7 +75,6 @@ void f(HMM *phmm, struct samples *p_samples, struct local_store_c *c, struct loc
                 printf("logprobf != logrpbb \n");
         //printf("logprobf = %f\n",(logprobf));
 
-        //*logp = logSum(*logp, logprobf);
         *logp += logprobf;
 
         /* update pi[]*/
@@ -99,7 +91,6 @@ void f(HMM *phmm, struct samples *p_samples, struct local_store_c *c, struct loc
         /* accumulate A*/
         for(t=1;t<=T-1;t++)
         {
-            //double scale_inv = 1.0 / scale[t+1];
             for(i=1;i<=N;i++)
             {
                 for(j=1;j<=N;j++)
@@ -115,6 +106,7 @@ void f(HMM *phmm, struct samples *p_samples, struct local_store_c *c, struct loc
             }
         }
 
+        /* accumulate B*/
         for(j=1;j<=N;j++)
         {
             for(t=1;t<=T;t++)
@@ -129,11 +121,10 @@ void f(HMM *phmm, struct samples *p_samples, struct local_store_c *c, struct loc
                         gamma_t_j = logSum(gamma_t_j, (alpha[t-1][i] + phmm->A[i][j]));
                     }
                 }
-                //printf("gamma is %f\n", scale[t]);
+
                 gamma_t_j = (gamma_t_j + outprob[j][t] + beta[t][j] - logprobf);
 
                 gamma_t_j = logExp(gamma_t_j);
-                //printf("gamma_t_j is %.20f\n",gamma_t_j);
 
                 for(k=1;k<=D;k++)
                 {
@@ -236,7 +227,7 @@ void BaumWelch(HMM *phmm, struct samples *p_samples, int *piter,
     logprobprev = -1000;
     
     *piter = 0;
-    //while( *piter < 1)
+
     while( *piter < maxiter )
     {
         *piter = *piter + 1;
@@ -247,7 +238,6 @@ void BaumWelch(HMM *phmm, struct samples *p_samples, int *piter,
 	    delta = logprob - logprobprev; 
 	    logprobprev = logprob;
         printf("iter %d, delta is : %.20f\n", *piter, delta);
-        //printf("iter %d, prob is : %.20f\n", *piter, logprob);
         if(delta<DELTA)
             break;
     }

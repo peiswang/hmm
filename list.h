@@ -1,5 +1,10 @@
-#ifndef _LINUX_LIST_H
-#define _LINUX_LIST_H
+/*
+** list.h borrowed from the linux kernel source v2.4
+*/
+
+
+#ifndef __LIST_H__
+#define __LIST_H__
 
 /*
  * Simple doubly linked list implementation.
